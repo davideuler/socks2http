@@ -366,7 +366,7 @@ class socksocket(socket.socket):
 			else:
 				portnum = 1080
 			_orgsocket.connect(self,(self.__proxy[1],portnum))
-			self.reader, self.writer = await asyncio.open_connection(sock=self, loop=asyncio.get_event_loop())
+			self.reader, self.writer = await asyncio.open_connection(sock=self)
 			await self.__negotiatesocks5(destpair[0],destpair[1])
 		elif self.__proxy[0] == PROXY_TYPE_SOCKS4:
 			if self.__proxy[2] != None:
