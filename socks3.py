@@ -374,7 +374,7 @@ class socksocket(socket.socket):
 			else:
 				portnum = 1080
 			_orgsocket.connect(self,(self.__proxy[1],portnum))
-			self.reader, self.writer = await asyncio.open_connection(sock=self, loop=asyncio.get_event_loop())
+			self.reader, self.writer = await asyncio.open_connection(sock=self)
 			await self.__negotiatesocks4(destpair[0],destpair[1])
 		elif self.__proxy[0] == PROXY_TYPE_HTTP:
 			if self.__proxy[2] != None:
@@ -382,10 +382,10 @@ class socksocket(socket.socket):
 			else:
 				portnum = 8080
 			_orgsocket.connect(self,(self.__proxy[1],portnum))
-			self.reader, self.writer = await asyncio.open_connection(sock=self, loop=asyncio.get_event_loop())
+			self.reader, self.writer = await asyncio.open_connection(sock=self)
 			await self.__negotiatehttp(destpair[0],destpair[1])
 		elif self.__proxy[0] == None:
 			_orgsocket.connect(self,(destpair[0],destpair[1]))
-			self.reader, self.writer = await asyncio.open_connection(sock=self, loop=asyncio.get_event_loop())
+			self.reader, self.writer = await asyncio.open_connection(sock=self)
 		else:
 			raise GeneralProxyError((4,_generalerrors[4]))
